@@ -16,4 +16,4 @@ in your mode line format.
 
 ** Notes
 
-This is specific to Linux.
+This is specific to Linux and OpenBSD.
