@@ -97,7 +97,8 @@ not available). Don't make calculation more than once a second."
       (setf (sb-alien:deref cpu-ctl 0) +ctl-kern+
             (sb-alien:deref cpu-ctl 1) +kern-cptime+)
       (sb-alien:with-alien ((load (sb-alien:array sb-alien:unsigned-long #.+cp-states+))
-                            (load-size (sb-alien:array (unsigned 8) #.(sb-alien:alien-size sb-alien:size-t :bytes))))
+                            (load-size (sb-alien:array (sb-alien:unsigned 8)
+                                                       #.(sb-alien:alien-size sb-alien:size-t :bytes))))
         (setf (sb-sys:sap-ref-64 (sb-alien:alien-sap load-size) 0)
               (sb-alien:alien-size (sb-alien:array sb-alien:unsigned-long #.+cp-states+) :bytes))
         (if (zerop
