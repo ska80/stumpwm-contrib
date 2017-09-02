@@ -72,7 +72,7 @@ not available). Don't make calculation more than once a second."
     (apply 'values *prev-result*)))
 
 #+openbsd
-(progn
+(eval-when (:compile-toplevel :load-toplevel :execute)
   (defconstant +cp-user+   0)
   (defconstant +cp-nice+   1)
   (defconstant +cp-sys+    2)
@@ -81,8 +81,9 @@ not available). Don't make calculation more than once a second."
   (defconstant +cp-states+ 5)
 
   (defconstant +ctl-kern+    1)
-  (defconstant +kern-cptime+ 40)
-
+  (defconstant +kern-cptime+ 40))
+#+openbsd
+(progn
   (declaim (inline %sysctl))
   (sb-alien:define-alien-routine ("sysctl" %sysctl) sb-alien:int
     (name (sb-alien:* sb-alien:int))
